@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, type Member, type Association, CATEGORY_LABEL, DURATION_LABEL } from '@/lib/db';
 import { Button } from '@/components/ui/button';
-import { Printer, IdCard, Receipt } from 'lucide-react';
+import { Printer, IdCard, Receipt, Building2, UserPlus } from 'lucide-react';
 import logo from '@/assets/logo.png';
 
 export default function Cards() {
@@ -36,25 +36,33 @@ export default function Cards() {
         <div className="glass-card p-4">
           <h3 className="font-display text-lg text-primary mb-3">المنخرطين</h3>
           <div className="space-y-2 max-h-72 overflow-y-auto">
-            {allMembers.map(m => (
+            {allMembers.length ? allMembers.map(m => (
               <button key={m.id} onClick={()=>setSelected({type:'member', data:m})}
                       className={`w-full text-right p-3 rounded-lg transition ${selected?.data === m ? 'hero-gradient text-white' : 'hover:bg-muted'}`}>
                 <p className="font-medium">{m.firstName} {m.lastName}</p>
                 <p className="text-xs opacity-80">{m.cardNumber}</p>
               </button>
-            ))}
+            )) : (
+              <div className="rounded-xl bg-muted/35 p-4 text-center text-sm text-muted-foreground">
+                لا يوجد منخرطون بعد
+              </div>
+            )}
           </div>
         </div>
         <div className="glass-card p-4">
           <h3 className="font-display text-lg text-primary mb-3">الجمعيات</h3>
           <div className="space-y-2 max-h-72 overflow-y-auto">
-            {allAssoc.map(a => (
+            {allAssoc.length ? allAssoc.map(a => (
               <button key={a.id} onClick={()=>setSelected({type:'association', data:a})}
                       className={`w-full text-right p-3 rounded-lg transition ${selected?.data === a ? 'hero-gradient text-white' : 'hover:bg-muted'}`}>
                 <p className="font-medium">{a.firstName} {a.lastName}</p>
                 <p className="text-xs opacity-80">{a.associationName}</p>
               </button>
-            ))}
+            )) : (
+              <div className="rounded-xl bg-muted/35 p-4 text-center text-sm text-muted-foreground">
+                لا توجد جمعيات بعد
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -150,8 +158,28 @@ export default function Cards() {
             )}
           </>
         ) : (
-          <div className="glass-card p-12 text-center text-muted-foreground">
-            اختر منخرطاً من القائمة لعرض بطاقته
+          <div className="glass-card flex min-h-[360px] flex-col items-center justify-center p-8 text-center">
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <IdCard className="h-8 w-8" />
+            </div>
+            <h3 className="font-display text-2xl text-primary">اختر ملفاً لعرض البطاقة</h3>
+            <p className="mt-2 max-w-md text-sm leading-7 text-muted-foreground">
+              أضف منخرطاً أو جمعية، ثم ارجع إلى هذه الصفحة لطباعة بطاقة الانخراط أو وصل التسديد.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Button asChild className="hero-gradient text-white">
+                <Link to="/members">
+                  <UserPlus className="h-4 w-4 ml-2" />
+                  إضافة منخرط
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/associations">
+                  <Building2 className="h-4 w-4 ml-2" />
+                  إضافة جمعية
+                </Link>
+              </Button>
+            </div>
           </div>
         )}
       </div>
