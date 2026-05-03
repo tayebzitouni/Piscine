@@ -43,11 +43,11 @@ export default function AppLayout() {
       </div>
 
       <div className="relative flex min-h-screen w-full flex-col lg:flex-row">
-        <aside className="no-print hero-gradient text-sidebar-foreground lg:sticky lg:top-0 lg:h-screen lg:w-80 lg:shrink-0 lg:overflow-hidden">
+        <aside className="no-print hero-gradient text-sidebar-foreground lg:sticky lg:top-0 lg:h-screen lg:w-80 lg:shrink-0 lg:overflow-y-auto">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(0_0%_100%_/_0.18),transparent_42%)]" />
 
-          <div className="relative flex h-full flex-col">
-            <div className="hidden border-b border-white/10 px-5 py-5 sm:px-6 lg:block">
+          <div className="relative flex min-h-full flex-col">
+            <div className="hidden shrink-0 border-b border-white/10 px-5 py-4 sm:px-6 lg:block">
               <div className="flex items-center gap-4">
                 <img
                   src={logo}
@@ -60,7 +60,7 @@ export default function AppLayout() {
                 </div>
               </div>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 text-right">
+              <div className="mt-4 grid grid-cols-2 gap-3 text-right">
                 <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur">
                   <p className="text-[11px] text-white/65">الوضع</p>
                   <p className="mt-1 flex items-center gap-2 text-sm font-bold text-white">
@@ -78,7 +78,7 @@ export default function AppLayout() {
               </div>
             </div>
 
-            <nav className="flex gap-2 overflow-x-auto px-3 py-2 lg:flex-1 lg:flex-col lg:overflow-visible lg:px-4 lg:py-4">
+            <nav className="flex gap-2 overflow-x-auto px-3 py-2 lg:min-h-0 lg:flex-1 lg:flex-col lg:overflow-y-auto lg:overflow-x-hidden lg:px-4 lg:py-3">
               {nav.map(({ to, label, icon: Icon, end }) => (
                 <NavLink
                   key={to}
@@ -100,11 +100,11 @@ export default function AppLayout() {
               ))}
             </nav>
 
-            <div className="hidden border-t border-white/10 px-5 py-4 text-center text-xs text-white/62 sm:px-6 lg:block">
+            <div className="hidden shrink-0 border-t border-white/10 px-5 py-3 text-center text-xs text-white/62 sm:px-6 lg:block">
               <button
                 type="button"
                 onClick={logout}
-                className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white transition hover:bg-white/15"
+                className="mb-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/15"
               >
                 <LogOut className="h-4 w-4" />
                 تسجيل الخروج
