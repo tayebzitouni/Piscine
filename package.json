@@ -14,7 +14,8 @@
     "desktop": "npm run build && electron .",
     "desktop:pack": "npm run build && electron-packager . Masbah --platform=win32 --arch=x64 --out=release --overwrite --ignore=\"^/(src|release|.vercel|.workspace)$\"",
     "desktop:dotnet": "npm run build && dotnet run --project desktop/Masbah.Desktop/Masbah.Desktop.csproj",
-    "desktop:dotnet:publish": "npm run build && dotnet publish desktop/Masbah.Desktop/Masbah.Desktop.csproj -c Release -r win-x64 --self-contained true -o release-dotnet/Masbah"
+    "desktop:dotnet:publish": "npm run build && dotnet publish desktop/Masbah.Desktop/Masbah.Desktop.csproj -c Release -r win-x64 --self-contained true -o release-dotnet/Masbah",
+    "installer:msi": "npm run desktop:dotnet:publish && powershell -ExecutionPolicy Bypass -File installer/Generate-MasbahWxs.ps1 && wix build installer/Masbah.wxs -arch x64 -d AppSourceDir=release-dotnet/Masbah -o release-installer/MasbahSetup.msi"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

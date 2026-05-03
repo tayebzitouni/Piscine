@@ -1,5 +1,8 @@
 release
 release-dotnet
+release-installer
+installer-output
+installer
 desktop
 node_modules
 .workspace

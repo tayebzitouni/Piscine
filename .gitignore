@@ -12,6 +12,9 @@ dist
 dist-ssr
 release
 release-dotnet
+release-installer
+installer-output
+installer/Masbah.wxs
 desktop/**/bin
 desktop/**/obj
 *.local
