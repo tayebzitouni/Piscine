@@ -6,6 +6,8 @@ namespace Masbah.Desktop;
 
 public partial class MainWindow : Window
 {
+    private const string AppHostName = "masbah.app";
+
     public MainWindow()
     {
         InitializeComponent();
@@ -23,9 +25,11 @@ public partial class MainWindow : Window
 
         AppWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
         AppWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+        AppWebView.NavigationCompleted += OnNavigationCompleted;
 
-        var indexPath = Path.Combine(AppContext.BaseDirectory, "wwwroot", "index.html");
-        if (!File.Exists(indexPath))
+        var wwwrootPath = Path.Combine(AppContext.BaseDirectory, "wwwroot");
+        var indexPath = Path.Combine(wwwrootPath, "index.html");
+        if (!Directory.Exists(wwwrootPath) || !File.Exists(indexPath))
         {
             MessageBox.Show(
                 "Desktop app files are missing. Please rebuild the application.",
@@ -36,6 +40,25 @@ public partial class MainWindow : Window
             return;
         }
 
-        AppWebView.Source = new Uri(indexPath);
+        AppWebView.CoreWebView2.SetVirtualHostNameToFolderMapping(
+            AppHostName,
+            wwwrootPath,
+            CoreWebView2HostResourceAccessKind.Allow);
+
+        AppWebView.Source = new Uri($"https://{AppHostName}/index.html");
+    }
+
+    private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
+    {
+        if (e.IsSuccess)
+        {
+            return;
+        }
+
+        MessageBox.Show(
+            $"The desktop app could not load its local files. WebView2 status: {e.WebErrorStatus}",
+            "Masbah",
+            MessageBoxButton.OK,
+            MessageBoxImage.Error);
     }
 }
