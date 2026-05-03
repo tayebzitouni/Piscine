@@ -35,15 +35,15 @@ export default function AppLayout() {
   const current = nav.find((item) => item.to === location.pathname);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="floating-orb absolute right-[-7rem] top-[-6rem] h-64 w-64 rounded-full bg-cyan-300/30" />
         <div className="floating-orb absolute left-[8%] top-[24%] h-40 w-40 rounded-full bg-amber-200/35 [animation-delay:1.2s]" />
         <div className="floating-orb absolute bottom-[-5rem] right-[18%] h-52 w-52 rounded-full bg-sky-300/20 [animation-delay:2.4s]" />
       </div>
 
-      <div className="relative flex min-h-screen w-full flex-col lg:flex-row">
-        <aside className="no-print hero-gradient text-sidebar-foreground lg:sticky lg:top-0 lg:h-screen lg:w-80 lg:shrink-0 lg:overflow-y-auto">
+      <div className="relative flex h-full w-full flex-col lg:flex-row">
+        <aside className="no-print hero-gradient text-sidebar-foreground lg:h-full lg:w-80 lg:shrink-0 lg:overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(0_0%_100%_/_0.18),transparent_42%)]" />
 
           <div className="relative flex min-h-full flex-col">
@@ -115,7 +115,7 @@ export default function AppLayout() {
           </div>
         </aside>
 
-        <main className="min-w-0 flex-1 overflow-visible lg:overflow-auto">
+        <main className="min-h-0 min-w-0 flex-1 overflow-y-auto">
           <header className="no-print sticky top-0 z-10 px-3 py-3 sm:px-6 lg:px-8 lg:py-4">
             <div className="section-shell flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div>
