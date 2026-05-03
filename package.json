@@ -12,7 +12,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "desktop": "npm run build && electron .",
-    "desktop:pack": "npm run build && electron-packager . Masbah --platform=win32 --arch=x64 --out=release --overwrite --ignore=\"^/(src|release|.vercel|.workspace)$\""
+    "desktop:pack": "npm run build && electron-packager . Masbah --platform=win32 --arch=x64 --out=release --overwrite --ignore=\"^/(src|release|.vercel|.workspace)$\"",
+    "desktop:dotnet": "npm run build && dotnet run --project desktop/Masbah.Desktop/Masbah.Desktop.csproj",
+    "desktop:dotnet:publish": "npm run build && dotnet publish desktop/Masbah.Desktop/Masbah.Desktop.csproj -c Release -r win-x64 --self-contained true -o release-dotnet/Masbah"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -1,0 +1,15 @@
+<Window x:Class="Masbah.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="Masbah"
+        Width="1366"
+        Height="768"
+        MinWidth="1100"
+        MinHeight="680"
+        WindowStartupLocation="CenterScreen"
+        Background="#eef7f8">
+  <Grid>
+    <wv2:WebView2 x:Name="AppWebView" />
+  </Grid>
+</Window>
